@@ -3,11 +3,9 @@ package com.project.wiki.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import jakarta.persistence.*;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 /**
  * 일부러 Setter 없이 한번 해보려고 Builder 패턴 적용!!
@@ -17,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Question {
     @Id // pk로 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id값이 1씩 자동 증가
@@ -32,6 +31,7 @@ public class Question {
     private String content;
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     // 질문 1개에 답변은 여러개 가능
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
