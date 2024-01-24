@@ -19,8 +19,9 @@ spring:
           useUnicode: true
           characterEncoding: utf-8
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     defer-datasource-initialization: true
+
 # create : 기존 테이블 삭제 후 재생성
 # create-drop : create와 동일하지만, 실행 끝나면 테이블 drop시킴
 # update : 기존 테이블에 칼럼 추가 반영. 칼럼 속성은 건들지 않음
