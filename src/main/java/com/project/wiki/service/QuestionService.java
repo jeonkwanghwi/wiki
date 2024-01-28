@@ -3,7 +3,7 @@ package com.project.wiki.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.project.wiki.DataNotFoundException;
+import com.project.wiki.exception.DataNotFoundException;
 import com.project.wiki.entity.Question;
 import com.project.wiki.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
