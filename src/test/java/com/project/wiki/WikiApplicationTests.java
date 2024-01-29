@@ -3,6 +3,7 @@ package com.project.wiki;
 import com.project.wiki.entity.Answer;
 import com.project.wiki.entity.Question;
 import com.project.wiki.repository.QuestionRepository;
+import com.project.wiki.service.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
@@ -20,25 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class WikiApplicationTests {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService questionService;
 
     @Test
-    // Transactional이 없어지니까 오히려 값이 들어간다 ?
     void testJpa() {
-        Question q1 = new Question().builder()
-                .subject("sbb가 무엇인가요 1")
-                .content("sbb에 대해서 알고 싶습니다.1")
-                .createDate(LocalDateTime.now())
-                .build();
-        questionRepository.save(q1); // 첫번째 질문 저장
-
-
-        Question q2 = new Question().builder()
-                .subject("sbb가 무엇인가요 2")
-                .content("sbb에 대해서 알고 싶습니다.2")
-                .createDate(LocalDateTime.now())
-                .build();
-        questionRepository.save(q2); // 두번째 질문 저장
-
+        for (int i = 1; i <= 300; i++) {
+            String subject = String.format("테스트 데이터입니다:[%03d]", i);
+            String content = "내용무";
+            this.questionService.create(subject, content);
+        }
     }
 }
