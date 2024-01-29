@@ -48,7 +48,7 @@ public class QuestionService {
     }
     
     
-    // 페이징 기능, 최신 글이 가장 위에 표시됨.
+    // 페이징 기능, 최신 글이 가장 위에 표시됨. (에타 게시글처럼 맨 위가 최신글)
     public Page<Question> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate")); // 최신순(=역순 = desc)으로 조회
