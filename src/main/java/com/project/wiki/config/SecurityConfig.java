@@ -2,6 +2,8 @@ package com.project.wiki.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,24 +28,30 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                /** 로그인하지 않아도 즉, 인증 없이도 페이지 접근을 허용하는 것임. (permitAll) */
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                /** 로그인 기능 */
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/user/login")
                         .defaultSuccessUrl("/"))
+                /** 로그아웃 기능 */
+                .logout((logout) -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                        .logoutSuccessUrl("/") // 로그아웃 성공시 루트 페이지("/")로 이동
+                        .invalidateHttpSession(true)) // 로그아웃 시 생성된 사용자 세션도 삭제
         ;
-        /**
-         * 로그인하지 않아도 즉, 인증 없이도 페이지 접근을 허용하는 것임. (permitAll)
-         */
         return http.build();
     }
 
-
-    /**
-     * BCryptPasswordEncoder은 빈으로 등록해서 관리해주는 게 좋다.
-     */
+    /** BCryptPasswordEncoder은 빈으로 등록해서 관리해주는 게 좋다. */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // 비크립트(BCrypt) 해시 함수를 사용
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }
