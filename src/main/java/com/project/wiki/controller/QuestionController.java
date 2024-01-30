@@ -1,9 +1,8 @@
 package com.project.wiki.controller;
 
-import com.project.wiki.entity.AnswerForm;
+import com.project.wiki.dto.AnswerForm;
 import com.project.wiki.entity.Question;
-import com.project.wiki.entity.QuestionForm;
-import com.project.wiki.repository.QuestionRepository;
+import com.project.wiki.dto.QuestionForm;
 import com.project.wiki.service.QuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor // final 붙은 속성을 포함하는 생성자를 자동으로 만들어 줌
 @Controller

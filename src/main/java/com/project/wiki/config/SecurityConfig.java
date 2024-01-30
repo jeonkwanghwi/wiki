@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -30,5 +32,14 @@ public class SecurityConfig {
          * 로그인하지 않아도 즉, 인증 없이도 페이지 접근을 허용하는 것임. (permitAll)
          */
         return http.build();
+    }
+
+
+    /**
+     * BCryptPasswordEncoder은 빈으로 등록해서 관리해주는 게 좋다.
+     */
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // 비크립트(BCrypt) 해시 함수를 사용
     }
 }

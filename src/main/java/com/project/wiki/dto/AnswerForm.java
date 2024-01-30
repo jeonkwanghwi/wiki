@@ -1,4 +1,4 @@
-package com.project.wiki.entity;
+package com.project.wiki.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 

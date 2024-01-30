@@ -1,6 +1,6 @@
 package com.project.wiki.controller;
 
-import com.project.wiki.entity.AnswerForm;
+import com.project.wiki.dto.AnswerForm;
 import com.project.wiki.entity.Question;
 import com.project.wiki.service.AnswerService;
 import com.project.wiki.service.QuestionService;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
