@@ -14,8 +14,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public SiteUser create(String nickname, String email, String password) {
+    public SiteUser create(String username, String nickname, String email, String password) {
         SiteUser user = new SiteUser().builder()
+                .username(username)
                 .nickname(nickname)
                 .email(email)
                 .password(passwordEncoder.encode(password)) // 패스워드 암호화

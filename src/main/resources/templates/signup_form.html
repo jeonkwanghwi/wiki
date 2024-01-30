@@ -8,6 +8,10 @@
   <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
     <div th:replace="~{form_errors :: formErrorsFragment}"></div>
     <div class="mb-3">
+      <label for="username" class="form-label">이름</label>
+      <input type="text" th:field="*{username}" class="form-control">
+    </div>
+    <div class="mb-3">
       <label for="nickname" class="form-label">닉네임 (영어)</label>
       <input type="text" th:field="*{nickname}" class="form-control">
     </div>

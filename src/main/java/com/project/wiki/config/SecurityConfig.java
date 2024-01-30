@@ -27,7 +27,11 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll());
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                .formLogin((formLogin) -> formLogin
+                        .loginPage("/user/login")
+                        .defaultSuccessUrl("/"))
+        ;
         /**
          * 로그인하지 않아도 즉, 인증 없이도 페이지 접근을 허용하는 것임. (permitAll)
          */

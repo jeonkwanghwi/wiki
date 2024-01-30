@@ -27,10 +27,11 @@ public class SiteUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String username; // 사용자 실명
+    private String password;
+
     @Column(unique = true)
     private String nickname; // 닉네임 중복 방지
-    
-    private String password;
 
     /** unique = true 라고 해주면 UK로 지정해 유일한 값만 저장할 수 있어서 동일한 값이 저장되는 것을 막을 수 있다. ★★★★★  */
     @Column(unique = true)
