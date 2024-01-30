@@ -31,7 +31,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    // 유효성 검증
+    // 유효성 검증 (제목, 내용 입력 안하면 못넘어가고 이런것들 다룸)
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     // 뷰템플릿 타임리프
@@ -41,6 +41,11 @@ dependencies {
     // JUnit 테스트 추가
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // spring security 추가
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // spring security 관련 타임리프 라이브러리 (security 쓰기위한 타임리프 확장기능)
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 }
 
 tasks.named('test') {
