@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.project.wiki.entity.SiteUser;
 import com.project.wiki.exception.DataNotFoundException;
 import com.project.wiki.entity.Question;
 import com.project.wiki.repository.QuestionRepository;
@@ -38,11 +39,12 @@ public class QuestionService {
     }
 
     // 질문으로 저장하기
-    public void create(String subject, String content) {
+    public void create(String subject, String content, SiteUser user) {
         Question q = new Question().builder()
                 .subject(subject)
                 .content(content)
                 .createDate(LocalDateTime.now())
+                .author(user)
                 .build();
         this.questionRepository.save(q);
     }

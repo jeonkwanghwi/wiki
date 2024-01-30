@@ -43,4 +43,7 @@ public class Question {
      * 질문_1개, 답변_N개 그런데 보통 게시판 서비스에서는 질문을 삭제하면 그에 달린 답변들도 함께 삭제된다.
      * 질문을 삭제하면 그에 달린 답변들도 모두 삭제되도록 cascade = CascadeType.REMOVE를 사용했다.
      */
+
+    @ManyToOne
+    private SiteUser author;
 }
