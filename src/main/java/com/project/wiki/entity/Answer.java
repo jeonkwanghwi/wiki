@@ -32,4 +32,7 @@ public class Answer {
     // 여러 답변 <-> 1개의 질문
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private SiteUser author;
 }

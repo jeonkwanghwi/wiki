@@ -42,7 +42,7 @@ public class UserController {
         /** 중복회원 방지하기
          * 닉네임 또는 이메일이 하나라도 중복이라면 오류 */
         try {
-            userService.create(userCreateForm.getNickname(),
+            userService.create(userCreateForm.getUsername(), userCreateForm.getNickname(),
                     userCreateForm.getEmail(), userCreateForm.getPassword1());
         }catch(DataIntegrityViolationException e) {
             e.printStackTrace();
@@ -55,5 +55,11 @@ public class UserController {
         }
 
         return "redirect:/";
+    }
+
+    /** login 기능 */
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
     }
 }
