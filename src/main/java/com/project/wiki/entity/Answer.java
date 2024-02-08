@@ -35,4 +35,9 @@ public class Answer {
 
     @ManyToOne
     private SiteUser author;
+
+    public void updateInfo(String content, LocalDateTime modifyDate) {
+        this.content = content;
+        this.modifyDate = modifyDate;
+    }
 }
