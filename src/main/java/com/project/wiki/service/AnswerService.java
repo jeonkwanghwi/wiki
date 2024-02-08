@@ -16,7 +16,7 @@ import java.util.Optional;
 public class AnswerService {
     private final AnswerRepository answerRepository;
 
-    public void create(Question question, String content, SiteUser author) {
+    public Answer create(Question question, String content, SiteUser author) {
         Answer answer = new Answer().builder()
                 .content(content)
                 .createDate(LocalDateTime.now())
@@ -24,6 +24,8 @@ public class AnswerService {
                 .author(author)
                 .build();
         this.answerRepository.save(answer);
+
+        return answer;
     }
 
     public Answer getAnswer(Integer id) {
@@ -42,5 +44,11 @@ public class AnswerService {
 
     public void delete(Answer answer) {
         this.answerRepository.delete(answer);
+    }
+
+    // 댓글을 누가 추천했는지 사용자 정보 저장
+    public void vote(Answer answer, SiteUser siteUser) {
+        answer.getVoter().add(siteUser);
+        this.answerRepository.save(answer);
     }
 }
