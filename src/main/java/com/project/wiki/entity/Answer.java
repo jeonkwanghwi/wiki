@@ -1,6 +1,8 @@
 package com.project.wiki.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,6 +37,9 @@ public class Answer {
 
     @ManyToOne
     private SiteUser author;
+
+    @ManyToMany
+    Set<SiteUser> voter;
 
     public void updateInfo(String content, LocalDateTime modifyDate) {
         this.content = content;

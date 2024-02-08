@@ -74,4 +74,11 @@ public class QuestionService {
     public void delete(Question question) {
         this.questionRepository.delete(question);
     }
+
+
+    // 게시물을 누가 추천했는지 사용자 정보 저장
+    public void vote(Question question, SiteUser siteUser) {
+        question.getVoter().add(siteUser);
+        this.questionRepository.save(question);
+    }
 }
