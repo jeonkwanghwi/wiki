@@ -32,9 +32,14 @@ public class QuestionController {
      * Model 객체는 따로 생성할 필요 없이 컨트롤러의 메서드에 매개변수로 지정하기만 하면 스프링 부트가 자동으로 Model 객체를 생성한다.
      */
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-        Page<Question> paging = this.questionService.getList(page);
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "keyword", defaultValue = "") String keyword) {
+
+        /** 검색어가 없으면 빈 문자열을 넘길 수도 있기에 디폴트는 null이("") 되는거임. */
+
+        Page<Question> paging = this.questionService.getList(page, keyword);
         model.addAttribute("paging", paging);
+        model.addAttribute("keyword", keyword);
         return "question_list";
     }
 
