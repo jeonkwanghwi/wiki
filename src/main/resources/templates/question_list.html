@@ -28,9 +28,14 @@
                 <span th:if="${#lists.size(question.answerList) > 0}"
                       th:text="${'[' + #lists.size(question.answerList) + ']'}"
                       class="text-danger small ms-2">
-                </span>
+            </span>
             </td>
-            <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td>
+            <td>
+            <span th:if="${question.author != null}"
+                  th:text="${question.author.nickname}"
+                  th:class="${question.author != null and question.author.nickname == 'panghwi'} ? 'purple-text' : ''">
+            </span>
+            </td>
             <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
