@@ -1,0 +1,19 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container my-3">
+    <form th:action="@{/user/findPW}" method="post">
+        <div th:if="${error}" class="alert alert-danger">
+            <!-- 사용자를 찾을 수 없을 때의 오류 메시지 -->
+            해당하는 닉네임이 없습니다. 다시 입력해주세요.
+        </div>
+        <div th:if="${password}" class="alert alert-success">
+            <!-- 비밀번호를 표시할 영역 -->
+            해당하는 닉네임의 비밀번호는 <strong th:text="${password}"></strong> 입니다.
+        </div>
+        <div class="mb-3">
+            <label for="nickname" class="form-label">닉네임을 입력해주세요</label>
+            <input type="text" name="nickname" id="nickname" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+    </form>
+</div>
+</html>

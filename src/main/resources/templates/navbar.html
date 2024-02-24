@@ -1,7 +1,8 @@
+
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
      xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">광위키</a>
+        <a class="navbar-brand" href="/">!광위키!</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,15 +10,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                    <a class="nav-link spaced-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+                    <a class="nav-link spaced-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/signup}">회원가입</a>
+                    <a class="nav-link spaced-link" th:href="@{/user/signup}">회원가입</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link spaced-link" sec:authorize="isAnonymous()" th:href="@{/user/findPW}">비밀번호 찾기(아직 수정중)</a>
                 </li>
                 <!-- 사용자 정보 표시 -->
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <span class="nav-link">현재 로그인한 사용자: <span th:text="${#authentication.name}"></span></span>
+                    <span class="nav-link spaced-link">광위키 많관부♥ / 현재 로그인한 사용자: <span th:text="${#authentication.name}"></span></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link spaced-link" th:href="@{/user/patchNote}">패치노트</a>
                 </li>
             </ul>
         </div>
