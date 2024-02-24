@@ -1,9 +1,11 @@
 package com.project.wiki.controller;
 
 import com.project.wiki.dto.AnswerForm;
+import com.project.wiki.entity.Answer;
 import com.project.wiki.entity.Question;
 import com.project.wiki.dto.QuestionForm;
 import com.project.wiki.entity.SiteUser;
+import com.project.wiki.service.AnswerService;
 import com.project.wiki.service.QuestionService;
 import com.project.wiki.service.UserService;
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserService userService;
+    private final AnswerService answerService;
     /**
      * Model 객체는 class와 템플릿 사이의 연결 고리 역할을 한다.
      * Model 객체에 값을 담아 두면 템플릿에서 그 값을 사용할 수 있다.
@@ -43,10 +46,14 @@ public class QuestionController {
         return "question_list";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
+    /** 질문 상세보기, 답변list도 페이징/정렬 함께 받아옴 */
+    @GetMapping(value = "/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm,
+                         @RequestParam(value = "answerPage", defaultValue = "0") int answerPage) {
         Question question = this.questionService.getQuestion(id);
+        Page<Answer> answerPaging =  this.answerService.getList(question, answerPage);
         model.addAttribute("question", question);
+        model.addAttribute("answerPaging", answerPaging);
         return "question_detail";
     }
 

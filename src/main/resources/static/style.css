@@ -1,0 +1,15 @@
+.spaced-link {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.hot-question {
+    color: red; /* 글씨를 빨간색으로 설정 */
+    font-weight: bold; /* 글씨를 진하게 설정 */
+    animation: burn 0.5s infinite alternate; /* 화려한 애니메이션 적용 */
+}
+
+@keyframes burn {
+    0% { color: red; }
+    100% { color: orange; } /* 빨간색에서 주황색으로 변하는 애니메이션 */
+}
