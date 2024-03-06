@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.List;
 
 @RequiredArgsConstructor // final 붙은 속성을 포함하는 생성자를 자동으로 만들어 줌
 @Controller
@@ -126,5 +127,13 @@ public class QuestionController {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.questionService.vote(question, siteUser);
         return String.format("redirect:/question/detail/%s", id);
+    }
+
+    /** 핫게시판 */
+    @GetMapping("/hotQuestions")
+    public String hotQuestions(Model model) {
+        List<Question> hotQuestions = questionService.getHotQuestions();
+        model.addAttribute("hotQuestions", hotQuestions);
+        return "hotQuestions";
     }
 }

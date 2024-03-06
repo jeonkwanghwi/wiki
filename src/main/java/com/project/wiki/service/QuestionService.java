@@ -109,4 +109,10 @@ public class QuestionService {
             }
         };
     }
+
+    // 핫게시판
+    public List<Question> getHotQuestions() {
+        // 추천수가 5개 이상인 게시글을 조회하는 메서드
+        return questionRepository.findHotQuestions();
+    }
 }

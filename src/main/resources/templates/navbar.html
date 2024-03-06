@@ -16,15 +16,18 @@
                 <li class="nav-item">
                     <a class="nav-link spaced-link" th:href="@{/user/signup}">회원가입</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link spaced-link" sec:authorize="isAnonymous()" th:href="@{/user/findPW}">비밀번호 찾기(아직 수정중)</a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link spaced-link" sec:authorize="isAnonymous()" th:href="@{/user/findPW}">비밀번호 찾기(아직 수정중)</a>-->
+<!--                </li>-->
                 <!-- 사용자 정보 표시 -->
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <span class="nav-link spaced-link">광위키 많관부♥ / 현재 로그인한 사용자: <span th:text="${#authentication.name}"></span></span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link spaced-link" th:href="@{/user/patchNote}">패치노트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link spaced-link" th:href="@{/question/hotQuestions}" style="color: red;">실시간 Hot!</a>
                 </li>
             </ul>
         </div>
