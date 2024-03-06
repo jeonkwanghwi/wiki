@@ -1,10 +1,69 @@
-<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<div layout:fragment="content" class="container my-3">
-    <!-- 질문 -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리들의 놀이터, 광위키!</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <style>
+        /* 추가한 CSS 스타일 */
+        .post-divider {
+            border-top: 1px solid #ccc; /* 회색 선 추가 */
+        }
+        .card {
+            background-color: #ffffff;
+            border: none;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-control {
+            border-radius: 20px;
+        }
+        .table {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .table th, .table td {
+            border: none;
+        }
+        .page-link {
+            color: #007bff;
+            border-radius: 20px;
+            border: 1px solid #007bff;
+        }
+        .page-link:hover {
+            background-color: #007bff;
+            color: #ffffff;
+            border-color: #007bff;
+        }
+        .pagination {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+<div class="container my-3">
+    <!-- 게시물 -->
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" th:utext="${@commonUtil.markdown(question.content)}"></div>
+            <!-- 게시물 정보 표시 -->
             <div class="d-flex justify-content-end">
                 <div th:if="${question.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
                     <div class="mb-2">마지막으로 수정한 시간</div>
@@ -17,6 +76,7 @@
                     <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
+            <!-- 게시물 버튼 -->
             <div class="my-3">
                 <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
                    th:data-uri="@{|/question/vote/${question.id}|}">
@@ -34,6 +94,8 @@
             </div>
         </div>
     </div>
+
+    <!-- 답변 섹션 -->
     <!-- 답변의 갯수 표시 -->
     <h5 class="border-bottom my-3 py-2"
         th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
@@ -42,6 +104,7 @@
         <a th:id="|answer_${answer.id}|"></a>
         <div class="card-body">
             <div class="card-text" th:utext="${@commonUtil.markdown(answer.content)}"></div>
+            <!-- 답변 정보 표시 -->
             <div class="d-flex justify-content-end">
                 <div th:if="${answer.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
                     <div class="mb-2">마지막으로 수정한 시간</div>
@@ -54,6 +117,7 @@
                     <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
+            <!-- 답변 버튼 -->
             <div class="my-3">
                 <a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
                    th:data-uri="@{|/answer/vote/${answer.id}|}">
@@ -72,7 +136,8 @@
         </div>
     </div>
     <!-- 답변 반복 끝  -->
-    <!-- 답변 페이징처리 시작 -->
+
+    <!-- 답변 페이징처리 -->
     <div th:if="${!answerPaging.isEmpty()}">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${!answerPaging.hasPrevious} ? 'disabled'">
@@ -93,7 +158,7 @@
             </li>
         </ul>
     </div>
-    <!-- 답변 페이징처리 끝 -->
+
     <!-- 답변 작성 -->
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
@@ -102,22 +167,5 @@
         <input type="submit" value="댓글 등록" class="btn btn-primary my-2">
     </form>
 </div>
-<script layout:fragment="script" type='text/javascript'>
-    const delete_elements = document.getElementsByClassName("delete");
-    Array.from(delete_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-    const recommend_elements = document.getElementsByClassName("recommend");
-    Array.from(recommend_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("이 글을 추천하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-</script>
+</body>
 </html>
