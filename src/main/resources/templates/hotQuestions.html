@@ -6,6 +6,29 @@
   <title>Hot게시판</title>
   <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      background-color: #ffffff;
+      border: 2px solid #007bff;
+    }
+    .card-title {
+      color: #007bff;
+    }
+    .card-text {
+      color: #6c757d;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
@@ -16,11 +39,13 @@
     <div class="col-md-8">
       <div class="list-group">
         <th:block th:each="question : ${hotQuestions}">
-          <a href="#" class="list-group-item list-group-item-action"
-             th:href="@{|/question/detail/${question.id}|}">
-            <h5 class="mb-1" th:text="${question.subject}"></h5>
-            <small th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></small>
-          </a>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title" th:text="${question.subject}"></h5>
+              <p class="card-text" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></p>
+              <a href="#" class="btn btn-primary" th:href="@{|/question/detail/${question.id}|}">자세히 보기</a>
+            </div>
+          </div>
         </th:block>
       </div>
     </div>
