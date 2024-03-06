@@ -24,11 +24,26 @@
             background-color: #0056b3;
             border-color: #0056b3;
         }
+        /* 홈으로 가는 버튼 스타일 */
+        .btn-home {
+            background-color: #ced4da;
+            border-color: #ced4da;
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: #495057;
+        }
+        .btn-home:hover {
+            background-color: #adb5bd;
+            border-color: #adb5bd;
+            color: #495057;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">위키 등록</h5>
+    <!-- 홈으로 -->
+    <a th:href="@{/}" class="btn btn-home mb-3 me-2">홈으로</a>
     <form th:object="${questionForm}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
@@ -40,6 +55,7 @@
             <label for="content" class="form-label">내용</label>
             <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
         </div>
+        <!-- 저장하기 -->
         <input type="submit" value="저장하기" class="btn btn-primary my-2">
     </form>
 </div>
